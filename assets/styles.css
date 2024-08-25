@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Faixa branca arredondada */
+.centered-banner {
+    background-color: white;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Exemplo de texto dentro da faixa */
+.centered-banner h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+body::after {
+    top: 0;
+    right: 0;
+}
+
+/* Faixa central arredondada */
+.centered-banner {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1;
+}

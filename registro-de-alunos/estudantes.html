@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Alunos Registrados</h2>
+        <ul>
+            {% for student in students %}
+                <li>{{ student[1] }} - {{ student[2] }} anos - Curso: {{ student[3] }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Voltar</a>
+    </div>
+</body>
+</html>

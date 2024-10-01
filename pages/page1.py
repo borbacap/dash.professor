@@ -1,15 +1,17 @@
 import dash
-from dash import html
-import dash_daq as daq
+from dash import html, dcc
+from dash.dependencies import Input, Output
 import sqlite3
-from dash import Input, Output
 
+# Registrar a página
+dash.register_page(__name__, path='/presenca')
+
+# Função para conectar ao banco de dados
 def connect_db():
     conn = sqlite3.connect('students.db')
     return conn
 
-dash.register_page(__name__, path='/regitro-de-presencas')
-
+# Função para obter a lista de alunos
 def get_students():
     conn = connect_db()
     cursor = conn.cursor()
@@ -18,12 +20,20 @@ def get_students():
     conn.close()
     return students
 
+# Layout da página de Presença
 layout = html.Div([
-    html.H1('Registro de presenças'),
-    html.Div('Registre aqui as presenças e faltas dos alunos'),
-     daq.BooleanSwitch(id='Presente?', on=False),
+    html.H3("Marcar Presença de Alunos", style={'textAlign': 'center'}),
+    
+    html.Label("Selecione o Aluno"),
+    dcc.Dropdown(id='student-dropdown', options=[
+        {'label': student[1], 'value': student[0]} for student in get_students()
+    ], placeholder="Selecione um aluno"),
+    
+    html.Button('Marcar Presença', id='mark-present', n_clicks=0),
+    html.Div(id='attendance-output', style={'marginTop': '20px', 'textAlign': 'center'}),
 ])
 
+# Callback para marcar presença do aluno
 @dash.callback(
     Output('attendance-output', 'children'),
     Input('mark-present', 'n_clicks'),
